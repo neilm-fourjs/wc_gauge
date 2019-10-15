@@ -1,0 +1,112 @@
+<html>
+<head>
+	<link rel="stylesheet" href="gauge.css" type="text/css">
+  <script src="https://assets.highcharts.com/js/code_prettify.js" type="text/javascript"></script>
+  <script src="jquery-3.1.1.js" type="text/javascript"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-more.js"></script>
+	<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+	<script src="gauge.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<H2>A Gauge Demo</H2>
+
+	<div class="outer">
+    <div id="container-speed" class="chart-container"></div>
+	</div>
+	<br><hr><br>
+	<div class="mydebug">
+		<b>My Debug:</b><br>
+    <div id="debug"><br>
+  </div>
+
+	<script>
+var gaugeOptions = {
+
+	chart: {
+		type: 'solidgauge'
+	},
+
+	title: null,
+
+	pane: {
+		center: ['50%', '85%'],
+		size: '140%',
+		startAngle: -90,
+		endAngle: 90,
+		background: {
+			backgroundColor:
+				Highcharts.defaultOptions.legend.backgroundColor || '#EEE',
+			innerRadius: '60%',
+			outerRadius: '100%',
+			shape: 'arc'
+		}
+	},
+
+	tooltip: {
+		enabled: false
+	},
+
+	// the value axis
+	yAxis: {
+		stops: [
+			[0.1, '#55BF3B'], // green
+			[0.5, '#DDDF0D'], // yellow
+			[0.9, '#DF5353'] // red
+		],
+		lineWidth: 0,
+		minorTickInterval: null,
+		tickAmount: 2,
+		title: {
+			y: -70
+		},
+		labels: {
+			y: 16
+		}
+	},
+
+	plotOptions: {
+		solidgauge: {
+			dataLabels: {
+				y: 5,
+				borderWidth: 0,
+				useHTML: true
+			}
+		}
+	}
+};
+
+// The speed gauge
+var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptions, {
+	yAxis: {
+		min: 0,
+		max: 200,
+		title: {
+			text: 'Speed'
+		}
+	},
+
+	credits: {
+		enabled: false
+	},
+
+	series: [{
+		name: 'Speed',
+		data: [80],
+		dataLabels: {
+			format:
+				'<div style="text-align:center">' +
+				'<span style="font-size:25px">{y}</span><br/>' +
+				'<span style="font-size:12px;opacity:0.4">km/h</span>' +
+				'</div>'
+		},
+		tooltip: {
+			valueSuffix: ' km/h'
+		}
+	}]
+}));
+	</script>
+
+</body>
+</html>
